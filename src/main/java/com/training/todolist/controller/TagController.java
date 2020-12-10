@@ -1,11 +1,10 @@
 package com.training.todolist.controller;
 
 import com.training.todolist.entity.Tag;
+import com.training.todolist.entity.Todo;
 import com.training.todolist.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,5 +17,10 @@ public class TagController {
     @GetMapping
     public List<Tag> getAll() {
         return this.tagService.findAll();
+    }
+
+    @PostMapping
+    public Tag create(@RequestBody Tag tag) {
+        return this.tagService.create(tag);
     }
 }
