@@ -21,6 +21,6 @@ public class TodoService {
     }
 
     public Todo findById(String todoId) {
-        return null;
+        return this.todoRepository.findById(todoId).orElse(null);
     }
 }
