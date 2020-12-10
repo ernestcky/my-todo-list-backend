@@ -13,6 +13,11 @@ public class Tag {
 
     public Tag() {}
 
+    public Tag(String content, String color) {
+        this.content = content;
+        this.color = color;
+    }
+
     public String getTagId() {
         return tagId;
     }

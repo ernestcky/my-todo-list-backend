@@ -3,13 +3,13 @@ package com.training.todolist.services;
 import com.training.todolist.entity.Tag;
 import com.training.todolist.entity.Todo;
 import com.training.todolist.repository.TagRepository;
-import com.training.todolist.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +60,24 @@ public class TagServiceTest {
 
         //when
         Tag actual = tagService.findById(expected.getTagId());
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void should_return_correct_updated_tag_when_update_given_repository_and_tag() {
+        //given
+        Tag init = new Tag();
+        Tag expected = new Tag("Tag1", "blue");
+
+        tagRepository.insert(init);
+
+        when(tagRepository.existsById(init.getTagId())).thenReturn(true);
+        when(tagRepository.save(expected)).thenReturn(expected);
+
+        //when
+        Tag actual = tagService.update(init.getTagId(), expected);
 
         //then
         assertEquals(expected, actual);
