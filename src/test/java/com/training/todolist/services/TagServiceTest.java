@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -47,6 +48,20 @@ public class TagServiceTest {
         Tag actual = tagService.create(expected);
 
         //given
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void should_return_correct_tag_when_get_by_id_given_tag() {
+        //given
+        Tag expected = new Tag();
+        tagRepository.insert(expected);
+        when(tagRepository.findById(expected.getTagId())).thenReturn(Optional.of(expected));
+
+        //when
+        Todo actual = tagService.findById(expected.getTagId());
+
+        //then
         assertEquals(expected, actual);
     }
 
