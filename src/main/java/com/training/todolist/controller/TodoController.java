@@ -35,4 +35,10 @@ public class TodoController {
     public Todo update(@PathVariable String todoId, @RequestBody Todo todoUpdate) throws TodoNotFoundException {
         return this.todoService.update(todoId, todoUpdate);
     }
+
+    @DeleteMapping("/{todoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String todoId) {
+        this.todoService.delete(todoId);
+    }
 }
