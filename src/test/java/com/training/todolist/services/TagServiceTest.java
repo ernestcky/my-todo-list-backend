@@ -85,7 +85,7 @@ public class TagServiceTest {
     }
 
     @Test
-    public void should_delete_successfully_when_delete_given_repository_and_tag_list() {
+    public void should_delete_successfully_when_delete_given_repository_and_tag_list() throws TagNotFoundException {
         //given
         Tag tag = new Tag();
         tagRepository.insert(tag);

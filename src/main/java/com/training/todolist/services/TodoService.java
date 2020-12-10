@@ -33,7 +33,10 @@ public class TodoService {
         return this.todoRepository.save(todoUpdate);
     }
 
-    public void delete(String todoId) {
+    public void delete(String todoId) throws TodoNotFoundException {
+        if (!this.todoRepository.existsById(todoId)) {
+            throw new TodoNotFoundException("Todo Not Found.");
+        }
         this.todoRepository.deleteById(todoId);
     }
 }

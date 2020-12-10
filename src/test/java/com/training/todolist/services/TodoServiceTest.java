@@ -87,7 +87,7 @@ class TodoServiceTest {
     }
 
     @Test
-    public void should_delete_successfully_when_delete_given_repository_and_todo_list() {
+    public void should_delete_successfully_when_delete_given_repository_and_todo_list() throws TodoNotFoundException {
         //given
         Todo todo = new Todo();
         todoRepository.insert(todo);

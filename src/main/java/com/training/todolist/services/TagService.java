@@ -33,7 +33,10 @@ public class TagService {
         return this.tagRepository.save(tagUpdate);
     }
 
-    public void delete(String tagId) {
+    public void delete(String tagId) throws TagNotFoundException {
+        if (!this.tagRepository.existsById(tagId)) {
+            throw new TagNotFoundException("Tag Not Found.");
+        }
         this.tagRepository.deleteById(tagId);
     }
 }

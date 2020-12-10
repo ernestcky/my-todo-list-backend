@@ -39,7 +39,7 @@ public class TagController {
 
     @DeleteMapping("/{tadId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String tadId) {
+    public void delete(@PathVariable String tadId) throws TagNotFoundException {
         this.tagService.delete(tadId);
     }
 }

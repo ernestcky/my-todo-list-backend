@@ -47,7 +47,7 @@ public class TodoController {
 
     @DeleteMapping("/{todoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String todoId) {
+    public void delete(@PathVariable String todoId) throws TodoNotFoundException {
         this.todoService.delete(todoId);
     }
 }
