@@ -125,7 +125,7 @@ public class TodoIntegrationTest {
                 .content(todoAsJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todoId").isString())
-                .andExpect(jsonPath("$.text").value("Todo2"))
+                .andExpect(jsonPath("$.text").value("todo2"))
                 .andExpect(jsonPath("$.done").value(true))
                 .andExpect(jsonPath("$.tagList", hasSize(0)));
     }

@@ -29,4 +29,8 @@ public class TodoController {
     public Todo getTodoById(@PathVariable String todoId) throws TodoNotFoundException {
         return this.todoService.findById(todoId);
     }
+    @PutMapping("/{todoId}")
+    public Todo update(@PathVariable String todoId, @RequestBody Todo todoUpdate) throws TodoNotFoundException {
+        return this.todoService.update(todoId, todoUpdate);
+    }
 }
