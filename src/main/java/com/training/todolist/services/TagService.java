@@ -33,6 +33,6 @@ public class TagService {
     }
 
     public void delete(String tagId) {
-
+        this.tagRepository.deleteById(tagId);
     }
 }
