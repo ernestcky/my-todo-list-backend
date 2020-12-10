@@ -89,4 +89,18 @@ public class TagIntegrationTest {
                 .andExpect(jsonPath("$.color").value("blue"));
     }
 
+    @Test
+    public void should_return_not_found_status_when_get_tag_given_invalid_id() throws Exception {
+        //when
+        Tag tag = new Tag("Tag1", "blue");
+        tagRepository.insert(tag);
+
+        String id = tag.getTagId();
+
+        tagRepository.deleteById(id);
+
+        mockMvc.perform(get("/tag/" + id))
+                .andExpect(status().isNotFound());
+    }
+
 }
