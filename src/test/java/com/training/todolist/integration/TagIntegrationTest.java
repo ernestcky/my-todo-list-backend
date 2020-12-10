@@ -123,4 +123,19 @@ public class TagIntegrationTest {
                 .andExpect(jsonPath("$.color").value("green"));
     }
 
+    @Test
+    public void should_return_empty_list_when_delete_given_one_tag_in_list() throws Exception {
+        //given
+        Integer expected = 0;
+        Tag tag = tagRepository.save(new Tag());
+
+        //when
+        mockMvc.perform(delete("/tag/" + tag.getTagId()))
+                .andExpect(status().isNoContent());
+
+        List<Tag> tags = tagRepository.findAll();
+        //the
+        assertEquals(expected, tags.size());
+    }
+
 }

@@ -6,6 +6,7 @@ import com.training.todolist.exceptions.TagNotFoundException;
 import com.training.todolist.exceptions.TodoNotFoundException;
 import com.training.todolist.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +36,6 @@ public class TagController {
     public Tag update(@PathVariable String tadId, @RequestBody Tag tagUpdate) throws TagNotFoundException {
         return this.tagService.update(tadId, tagUpdate);
     }
+
 
 }
