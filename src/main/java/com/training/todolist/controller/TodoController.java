@@ -18,4 +18,9 @@ public class TodoController {
     public List<Todo> getAll() {
         return this.todoService.findAll();
     }
+
+    @PostMapping
+    public Todo create(@RequestBody Todo todo) {
+        return this.todoService.create(todo);
+    }
 }
