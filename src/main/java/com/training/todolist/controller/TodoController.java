@@ -5,6 +5,7 @@ import com.training.todolist.exceptions.TodoNotFoundException;
 import com.training.todolist.repository.TodoRepository;
 import com.training.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class TodoController {
     public Todo getTodoById(@PathVariable String todoId) throws TodoNotFoundException {
         return this.todoService.findById(todoId);
     }
+
     @PutMapping("/{todoId}")
     public Todo update(@PathVariable String todoId, @RequestBody Todo todoUpdate) throws TodoNotFoundException {
         return this.todoService.update(todoId, todoUpdate);

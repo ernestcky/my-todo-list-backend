@@ -130,4 +130,19 @@ public class TodoIntegrationTest {
                 .andExpect(jsonPath("$.tagList", hasSize(0)));
     }
 
+    @Test
+    public void should_return_empty_list_when_delete_given_one_todo_in_list() throws Exception {
+        //given
+        Integer expected = 0;
+        Todo todo = todoRepository.save(new Todo());
+
+        //when
+        mockMvc.perform(delete("/Todo/" + todo.getTodoId()))
+                .andExpect(status().isNoContent());
+
+        List<Todo> todos = todoRepository.findAll();
+        //the
+        assertEquals(expected, todos.size());
+    }
+
 }
