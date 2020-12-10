@@ -1,6 +1,7 @@
 package com.training.todolist.controller;
 
 import com.training.todolist.entity.Todo;
+import com.training.todolist.exceptions.TodoNotFoundException;
 import com.training.todolist.repository.TodoRepository;
 import com.training.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TodoController {
     }
 
     @GetMapping("/{todoId}")
-    public Todo getTodoById(@PathVariable String todoId) {
+    public Todo getTodoById(@PathVariable String todoId) throws TodoNotFoundException {
         return this.todoService.findById(todoId);
     }
 }

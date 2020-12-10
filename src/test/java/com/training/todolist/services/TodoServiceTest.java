@@ -3,6 +3,7 @@ package com.training.todolist.services;
 
 import com.training.todolist.entity.Tag;
 import com.training.todolist.entity.Todo;
+import com.training.todolist.exceptions.TodoNotFoundException;
 import com.training.todolist.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,7 +55,7 @@ class TodoServiceTest {
     }
 
     @Test
-    public void should_return_correct_todo_when_get_by_id_given_todo() {
+    public void should_return_correct_todo_when_get_by_id_given_todo() throws TodoNotFoundException {
         //given
         Todo expected = new Todo();
         todoRepository.insert(expected);

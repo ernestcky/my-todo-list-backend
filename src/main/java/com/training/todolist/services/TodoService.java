@@ -1,6 +1,7 @@
 package com.training.todolist.services;
 
 import com.training.todolist.entity.Todo;
+import com.training.todolist.exceptions.TodoNotFoundException;
 import com.training.todolist.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class TodoService {
         return this.todoRepository.insert(todo);
     }
 
-    public Todo findById(String todoId) {
-        return this.todoRepository.findById(todoId).orElse(null);
+    public Todo findById(String todoId) throws TodoNotFoundException {
+        return this.todoRepository.findById(todoId).orElseThrow(() ->new TodoNotFoundException("Todo Not Found."));
     }
 
     public Todo update(String todoId, Todo todoUpdate) {
