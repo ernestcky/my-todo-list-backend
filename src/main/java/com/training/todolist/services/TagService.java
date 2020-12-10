@@ -21,7 +21,7 @@ public class TagService {
         return this.tagRepository.insert(tag);
     }
 
-    public Todo findById(String tagId) {
-        return null;
+    public Tag findById(String tagId) {
+        return this.tagRepository.findById(tagId).orElse(null);
     }
 }

@@ -59,7 +59,7 @@ public class TagServiceTest {
         when(tagRepository.findById(expected.getTagId())).thenReturn(Optional.of(expected));
 
         //when
-        Todo actual = tagService.findById(expected.getTagId());
+        Tag actual = tagService.findById(expected.getTagId());
 
         //then
         assertEquals(expected, actual);
