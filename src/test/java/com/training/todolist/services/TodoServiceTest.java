@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -49,4 +50,19 @@ class TodoServiceTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void should_return_correct_todo_when_get_by_id_given_todo() {
+        //given
+        Todo expected = new Todo();
+        todoRepository.insert(expected);
+        when(todoRepository.findById(expected.getTodoId())).thenReturn(Optional.of(expected));
+                
+        //when
+        Todo actual = todoService.findById(expected.getTodoId());
+        
+        //then
+        assertEquals(expected, actual);
+    }
+    
 }

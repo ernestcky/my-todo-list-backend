@@ -19,4 +19,8 @@ public class TodoService {
     public Todo create(Todo expected) {
         return this.todoRepository.insert(expected);
     }
+
+    public Todo findById(String todoId) {
+        return null;
+    }
 }

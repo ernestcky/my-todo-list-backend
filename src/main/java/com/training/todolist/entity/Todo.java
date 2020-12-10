@@ -15,4 +15,36 @@ public class Todo {
     private List<Tag> tagList;
 
     public Todo() {}
+
+    public String getTodoId() {
+        return this.TodoId;
+    }
+
+    public void setTodoId(String todoId) {
+        TodoId = todoId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
+    public List<Tag> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
+    }
 }
