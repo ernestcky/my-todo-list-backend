@@ -1,7 +1,10 @@
 package com.training.todolist.controller;
 
+import com.training.todolist.dto.TodoRequest;
+import com.training.todolist.dto.TodoResponse;
 import com.training.todolist.entity.Todo;
 import com.training.todolist.exceptions.TodoNotFoundException;
+import com.training.todolist.mapper.TodoMapper;
 import com.training.todolist.repository.TodoRepository;
 import com.training.todolist.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,31 +12,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Todo")
 public class TodoController {
-    @Autowired
     private TodoService todoService;
+    private TodoMapper todoMapper;
+
+    public TodoController(TodoService todoService, TodoMapper todoMapper) {
+        this.todoService = todoService;
+        this.todoMapper = todoMapper;
+    }
 
     @GetMapping
-    public List<Todo> getAll() {
-        return this.todoService.findAll();
+    public List<TodoResponse> getAll() {
+        return this.todoService.findAll().stream().map(todoMapper::toResponse).collect(Collectors.toList());
     }
 
     @PostMapping
-    public Todo create(@RequestBody Todo todo) {
-        return this.todoService.create(todo);
+    public TodoResponse create(@RequestBody TodoRequest todoRequest) {
+        return todoMapper.toResponse(this.todoService.create(todoMapper.toEntity(todoRequest)));
     }
 
     @GetMapping("/{todoId}")
-    public Todo getTodoById(@PathVariable String todoId) throws TodoNotFoundException {
-        return this.todoService.findById(todoId);
+    public TodoResponse getTodoById(@PathVariable String todoId) throws TodoNotFoundException {
+        return todoMapper.toResponse(this.todoService.findById(todoId));
     }
 
     @PutMapping("/{todoId}")
-    public Todo update(@PathVariable String todoId, @RequestBody Todo todoUpdate) throws TodoNotFoundException {
-        return this.todoService.update(todoId, todoUpdate);
+    public TodoResponse update(@PathVariable String todoId, @RequestBody TodoRequest todoUpdate) throws TodoNotFoundException {
+        return todoMapper.toResponse(this.todoService.update(todoId, todoMapper.toEntity(todoUpdate)));
     }
 
     @DeleteMapping("/{todoId}")
