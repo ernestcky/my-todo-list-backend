@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TagServiceTest {
@@ -81,6 +81,19 @@ public class TagServiceTest {
 
         //then
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_tag_list() {
+        //given
+        Tag tag = new Tag();
+        tagRepository.insert(tag);
+
+        //when
+        tagService.delete(tag.getTagId());
+
+        //then
+        verify(tagRepository, times(1)).deleteById(tag.getTagId());
     }
 
 }

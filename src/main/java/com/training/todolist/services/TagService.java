@@ -31,4 +31,8 @@ public class TagService {
         tagUpdate.setTagId(tagId);
         return this.tagRepository.save(tagUpdate);
     }
+
+    public void delete(String tagId) {
+
+    }
 }

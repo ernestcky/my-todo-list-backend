@@ -59,10 +59,10 @@ class TodoServiceTest {
         Todo expected = new Todo();
         todoRepository.insert(expected);
         when(todoRepository.findById(expected.getTodoId())).thenReturn(Optional.of(expected));
-                
+
         //when
         Todo actual = todoService.findById(expected.getTodoId());
-        
+
         //then
         assertEquals(expected, actual);
     }
@@ -97,7 +97,5 @@ class TodoServiceTest {
         //then
         verify(todoRepository, times(1)).deleteById(todo.getTodoId());
     }
-    
 
-    
 }
