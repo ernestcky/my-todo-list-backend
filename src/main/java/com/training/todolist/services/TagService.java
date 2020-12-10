@@ -12,8 +12,7 @@ public class TagService {
     @Autowired
     private TagRepository tagRepository;
 
-
     public List<Tag> findAll() {
-        return null;
+        return this.tagRepository.findAll();
     }
 }
