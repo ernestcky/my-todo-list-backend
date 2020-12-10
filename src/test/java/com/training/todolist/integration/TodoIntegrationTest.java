@@ -17,8 +17,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -107,4 +106,28 @@ public class TodoIntegrationTest {
         mockMvc.perform(get("/Todo/" + id))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    public void should_return_saved_todo_when_update_given_todo_json() throws Exception {
+        //given
+        Todo todo = new Todo("Todo1", false, new ArrayList<Tag>());
+        todoRepository.save(todo);
+
+        String todoAsJson = "{\n" +
+                "    \"text\": \"todo2\",\n" +
+                "    \"done\": true,\n" +
+                "    \"tagList\": []\n" +
+                "}";
+
+        //when
+        mockMvc.perform(put("/Todo/" + todo.getTodoId())
+                .contentType(APPLICATION_JSON)
+                .content(todoAsJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.todoId").isString())
+                .andExpect(jsonPath("$.text").value("Todo2"))
+                .andExpect(jsonPath("$.done").value(true))
+                .andExpect(jsonPath("$.tagList", hasSize(0)));
+    }
+
 }
