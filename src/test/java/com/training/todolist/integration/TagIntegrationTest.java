@@ -17,8 +17,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -101,6 +100,27 @@ public class TagIntegrationTest {
 
         mockMvc.perform(get("/tag/" + id))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void should_return_saved_tag_when_update_given_tag_json() throws Exception {
+        //given
+        Tag tag = new Tag("Tag1", "blue");
+        tagRepository.save(tag);
+
+        String tagAsJson = "{\n" +
+                "    \"content\": \"tag2\",\n" +
+                "    \"color\": \"green\"\n" +
+                "}";
+
+        //when
+        mockMvc.perform(put("/tag/" + tag.getTagId())
+                .contentType(APPLICATION_JSON)
+                .content(tagAsJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.tagId").isString())
+                .andExpect(jsonPath("$.content").value("tag2"))
+                .andExpect(jsonPath("$.color").value("green"));
     }
 
 }
