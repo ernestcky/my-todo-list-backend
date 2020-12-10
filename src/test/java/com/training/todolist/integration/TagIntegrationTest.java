@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,4 +74,19 @@ public class TagIntegrationTest {
         assertEquals("tag1", tagList.get(0).getContent());
         assertEquals("blue", tagList.get(0).getColor());
     }
+
+    @Test
+    public void should_return_correct_tag_when_get_tag_given_valid_id() throws Exception {
+        //given
+        Tag tag = new Tag("Tag1", "blue");
+        tagRepository.insert(tag);
+
+        //when
+        mockMvc.perform(get("/tag/" + tag.getTagId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.tagId").isString())
+                .andExpect(jsonPath("$.content").value("Tag1"))
+                .andExpect(jsonPath("$.color").value("blue"));
+    }
+
 }
