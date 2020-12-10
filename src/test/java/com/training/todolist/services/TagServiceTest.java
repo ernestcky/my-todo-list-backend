@@ -2,6 +2,7 @@ package com.training.todolist.services;
 
 import com.training.todolist.entity.Tag;
 import com.training.todolist.entity.Todo;
+import com.training.todolist.exceptions.TagNotFoundException;
 import com.training.todolist.repository.TagRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +53,7 @@ public class TagServiceTest {
     }
 
     @Test
-    public void should_return_correct_tag_when_get_by_id_given_tag() {
+    public void should_return_correct_tag_when_get_by_id_given_tag() throws TagNotFoundException {
         //given
         Tag expected = new Tag();
         tagRepository.insert(expected);

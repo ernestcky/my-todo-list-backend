@@ -1,6 +1,7 @@
 package com.training.todolist.controller;
 
 import com.training.todolist.entity.Tag;
+import com.training.todolist.exceptions.TagNotFoundException;
 import com.training.todolist.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class TagController {
     }
 
     @GetMapping("/{tagId}")
-    public Tag getTagById(@PathVariable String tagId) {
+    public Tag getTagById(@PathVariable String tagId) throws TagNotFoundException {
         return this.tagService.findById(tagId);
     }
 }

@@ -1,6 +1,7 @@
 package com.training.todolist.services;
 
 import com.training.todolist.entity.Tag;
+import com.training.todolist.exceptions.TagNotFoundException;
 import com.training.todolist.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class TagService {
         return this.tagRepository.insert(tag);
     }
 
-    public Tag findById(String tagId) {
-        return this.tagRepository.findById(tagId).orElse(null);
+    public Tag findById(String tagId) throws TagNotFoundException {
+        return this.tagRepository.findById(tagId).orElseThrow(() -> new TagNotFoundException("Tag Not Found."));
     }
 
     public Tag update(String tagId, Tag tagUpdate) {
