@@ -24,7 +24,11 @@ public class TodoService {
         return this.todoRepository.findById(todoId).orElse(null);
     }
 
-    public Todo update(String todoId, Todo expected) {
-        return null;
+    public Todo update(String todoId, Todo todoUpdate) {
+        if (!this.todoRepository.existsById(todoId)) {
+            throw new RuntimeException();
+        }
+        todoUpdate.setTodoId(todoId);
+        return this.todoRepository.save(todoUpdate);
     }
 }
