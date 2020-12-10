@@ -93,4 +93,18 @@ public class TodoIntegrationTest {
                 .andExpect(jsonPath("$.done").value(false))
                 .andExpect(jsonPath("$.tagList", hasSize(0)));
     }
+
+    @Test
+    public void should_return_not_found_status_when_get_todo_given_invalid_id() throws Exception {
+        //when
+        Todo todo = new Todo("Todo1", false, new ArrayList<Tag>());
+        todoRepository.insert(todo);
+
+        String id = todo.getTodoId();
+
+        todoRepository.deleteById(id);
+
+        mockMvc.perform(get("/Todo/" + id))
+                .andExpect(status().isNotFound());
+    }
 }
