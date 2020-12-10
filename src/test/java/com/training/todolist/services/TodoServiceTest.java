@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TodoServiceTest {
@@ -84,6 +84,20 @@ class TodoServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void should_delete_successfully_when_delete_given_repository_and_todo_list() {
+        //given
+        Todo todo = new Todo();
+        todoRepository.insert(todo);
+
+        //when
+        todoService.delete(todo.getTodoId());
+
+        //then
+        verify(todoRepository, times(1)).deleteById(todo.getTodoId());
+    }
+    
 
     
 }

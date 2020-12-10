@@ -16,8 +16,8 @@ public class TodoService {
         return this.todoRepository.findAll();
     }
 
-    public Todo create(Todo expected) {
-        return this.todoRepository.insert(expected);
+    public Todo create(Todo todo) {
+        return this.todoRepository.insert(todo);
     }
 
     public Todo findById(String todoId) {
@@ -30,5 +30,9 @@ public class TodoService {
         }
         todoUpdate.setTodoId(todoId);
         return this.todoRepository.save(todoUpdate);
+    }
+
+    public void delete(String todoId) {
+
     }
 }
