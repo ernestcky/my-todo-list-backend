@@ -37,5 +37,9 @@ public class TagController {
         return this.tagService.update(tadId, tagUpdate);
     }
 
-
+    @DeleteMapping("/{tadId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String tadId) {
+        this.tagService.delete(tadId);
+    }
 }
