@@ -17,6 +17,6 @@ public class TagService {
     }
 
     public Tag create(Tag tag) {
-        return null;
+        return this.tagRepository.insert(tag);
     }
 }
