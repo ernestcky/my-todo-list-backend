@@ -25,9 +25,9 @@ public class TodoService {
         return this.todoRepository.findById(todoId).orElseThrow(() ->new TodoNotFoundException("Todo Not Found."));
     }
 
-    public Todo update(String todoId, Todo todoUpdate) {
+    public Todo update(String todoId, Todo todoUpdate) throws TodoNotFoundException {
         if (!this.todoRepository.existsById(todoId)) {
-            throw new RuntimeException();
+            throw new TodoNotFoundException("Todo Not Found.");
         }
         todoUpdate.setTodoId(todoId);
         return this.todoRepository.save(todoUpdate);

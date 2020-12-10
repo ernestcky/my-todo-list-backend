@@ -69,7 +69,7 @@ class TodoServiceTest {
     }
 
     @Test
-    public void should_return_correct_updated_todo_when_update_given_repository_and_todo() {
+    public void should_return_correct_updated_todo_when_update_given_repository_and_todo() throws TodoNotFoundException {
         //given
         Todo init = new Todo();
         Todo expected = new Todo("text", true, new ArrayList<Tag>());

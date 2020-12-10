@@ -67,7 +67,7 @@ public class TagServiceTest {
     }
 
     @Test
-    public void should_return_correct_updated_tag_when_update_given_repository_and_tag() {
+    public void should_return_correct_updated_tag_when_update_given_repository_and_tag() throws TagNotFoundException {
         //given
         Tag init = new Tag();
         Tag expected = new Tag("Tag1", "blue");

@@ -25,9 +25,9 @@ public class TagService {
         return this.tagRepository.findById(tagId).orElseThrow(() -> new TagNotFoundException("Tag Not Found."));
     }
 
-    public Tag update(String tagId, Tag tagUpdate) {
+    public Tag update(String tagId, Tag tagUpdate) throws TagNotFoundException {
         if (!this.tagRepository.existsById(tagId)) {
-            throw new RuntimeException();
+            throw new TagNotFoundException("Tag Not Found.");
         }
         tagUpdate.setTagId(tagId);
         return this.tagRepository.save(tagUpdate);
