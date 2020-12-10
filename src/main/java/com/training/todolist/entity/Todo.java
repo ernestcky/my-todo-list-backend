@@ -16,6 +16,12 @@ public class Todo {
 
     public Todo() {}
 
+    public Todo(String text, Boolean done, List<Tag> tagList) {
+        this.text = text;
+        this.done = done;
+        this.tagList = tagList;
+    }
+
     public String getTodoId() {
         return this.TodoId;
     }

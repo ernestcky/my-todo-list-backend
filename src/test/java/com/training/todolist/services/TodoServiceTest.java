@@ -1,6 +1,7 @@
 package com.training.todolist.services;
 
 
+import com.training.todolist.entity.Tag;
 import com.training.todolist.entity.Todo;
 import com.training.todolist.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -64,5 +66,24 @@ class TodoServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void should_return_correct_updated_todo_when_update_given_repository_and_todo() {
+        //given
+        Todo init = new Todo();
+        Todo expected = new Todo("text", true, new ArrayList<Tag>());
+
+        todoRepository.insert(init);
+
+        when(todoRepository.existsById(init.getTodoId())).thenReturn(true);
+        when(todoRepository.save(expected)).thenReturn(expected);
+
+        //when
+        Todo actual = todoService.update(init.getTodoId(), expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
     
 }
