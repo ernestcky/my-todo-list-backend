@@ -18,6 +18,12 @@ public class Tag {
         this.color = color;
     }
 
+    public Tag(String tagId, String content, String color) {
+        this.tagId = tagId;
+        this.content = content;
+        this.color = color;
+    }
+
     public String getTagId() {
         return tagId;
     }

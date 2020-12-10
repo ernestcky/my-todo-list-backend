@@ -9,7 +9,7 @@ import java.util.List;
 @Document
 public class Todo {
     @MongoId(FieldType.OBJECT_ID)
-    private String TodoId;
+    private String todoId;
     private String text;
     private Boolean done;
     private List<Tag> tagList;
@@ -22,12 +22,19 @@ public class Todo {
         this.tagList = tagList;
     }
 
+    public Todo(String todoId, String text, Boolean done, List<Tag> tagList) {
+        this.todoId = todoId;
+        this.text = text;
+        this.done = done;
+        this.tagList = tagList;
+    }
+
     public String getTodoId() {
-        return this.TodoId;
+        return this.todoId;
     }
 
     public void setTodoId(String todoId) {
-        TodoId = todoId;
+        this.todoId = todoId;
     }
 
     public String getText() {

@@ -39,7 +39,7 @@ public class TodoIntegrationTest {
         //then
         mockMvc.perform(get("/Todo"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect(jsonPath("$[0].todoId").isString())
                 .andExpect(jsonPath("$[0].text").value("Todo1"))
                 .andExpect(jsonPath("$[0].done").value(false))
                 .andExpect(jsonPath("$[0].tagList[0].content").value("tag1"))
