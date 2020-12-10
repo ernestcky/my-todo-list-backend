@@ -25,6 +25,10 @@ public class TagService {
     }
 
     public Tag update(String tagId, Tag tagUpdate) {
-        return null;
+        if (!this.tagRepository.existsById(tagId)) {
+            throw new RuntimeException();
+        }
+        tagUpdate.setTagId(tagId);
+        return this.tagRepository.save(tagUpdate);
     }
 }
