@@ -15,4 +15,8 @@ public class TodoService {
     public List<Todo> findAll() {
         return this.todoRepository.findAll();
     }
+
+    public Todo create(Todo expected) {
+        return null;
+    }
 }
