@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tag")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TagController {
     private TagService tagService;
     private TagMapper tagMapper;

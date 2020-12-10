@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Todo")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoController {
     private TodoService todoService;
     private TodoMapper todoMapper;
