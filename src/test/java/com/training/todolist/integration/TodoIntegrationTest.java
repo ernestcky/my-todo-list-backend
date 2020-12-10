@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,5 +77,20 @@ public class TodoIntegrationTest {
         assertEquals("todo1", todoList.get(0).getText());
         assertEquals(false, todoList.get(0).getDone());
         assertEquals(0, todoList.get(0).getTagList().size());
+    }
+
+    @Test
+    public void should_return_correct_todo_when_get_todo_given_valid_id() throws Exception {
+        //given
+        Todo todo = new Todo("Todo1", false, new ArrayList<Tag>());
+        todoRepository.insert(todo);
+
+        //when
+        mockMvc.perform(get("/Todo/" + todo.getTodoId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.todoId").isString())
+                .andExpect(jsonPath("$.text").value("Todo1"))
+                .andExpect(jsonPath("$.done").value(false))
+                .andExpect(jsonPath("$.tagList", hasSize(0)));
     }
 }
