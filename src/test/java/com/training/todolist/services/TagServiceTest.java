@@ -37,4 +37,17 @@ public class TagServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void should_return_created_tag_when_create_given_tag() {
+        // given
+        Tag expected = new Tag();
+        when(tagRepository.insert(expected)).thenReturn(expected);
+
+        // when
+        Tag actual = tagService.create(expected);
+
+        //given
+        assertEquals(expected, actual);
+    }
+
 }
