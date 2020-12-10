@@ -17,6 +17,6 @@ public class TodoService {
     }
 
     public Todo create(Todo expected) {
-        return null;
+        return this.todoRepository.insert(expected);
     }
 }
